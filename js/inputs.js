@@ -1,5 +1,6 @@
 //package requirements
 var inquirer = require("inquirer");
+var clc = require('cli-color');
 
 //local files included
 var Display = require('./display.js');
@@ -59,7 +60,7 @@ var getUserGuess = function(previousResponse, player, myWord){
 					if(found){
 						//checks if guessed all the letters
 						if(myWord.guessedAll()){
-							console.log("You WIN!!!");
+							console.log(clc.greenBright("You WIN!!!"));
 							playAgain(player, myWord);
 						}
 						else
@@ -67,11 +68,11 @@ var getUserGuess = function(previousResponse, player, myWord){
 					}
 					//bad guess
 					else
-						getUserGuess("\""+answer.guess+"\" is an incorrect guess.", player, myWord);
+						getUserGuess("\""+clc.redBright(answer.guess)+"\" is an incorrect guess.", player, myWord);
 				}
 				//game over
 				else{
-					console.log("GAME OVER!");
+					console.log(clc.redBright("GAME OVER!"));
 					console.log("The correct phrase is: "+myWord.getAnswer());
 					playAgain(player, myWord);
 				}
