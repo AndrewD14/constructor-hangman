@@ -44,7 +44,17 @@ function displayGallow(guessesRemaining){
 //function to display the results
 exports.displayResults = function(player, myWord){
 	clearScreen();
+	generateLogo();
 	displayGallow(player.getLives());
 	console.log();
 	console.log(myWord.getReveal());
+}
+
+//function to display the logo
+function generateLogo(){
+	console.log("   _____ __  ______  __________  __  ____________  ____  ___________")
+	console.log("  / ___// / / / __ \\/ ____/ __ \\/ / / / ____/ __ \\/ __ \\/ ____/ ___/")
+	console.log("  \\__ \\/ / / / /_/ / __/ / /_/ / /_/ / __/ / /_/ / / / / __/  \\__ \\")
+	console.log(" ___/ / /_/ / ____/ /___/ _, _/ __  / /___/ _, _/ /_/ / /___ ___/ /")
+	console.log("/____/\\____/_/   /_____/_/ |_/_/ /_/_____/_/ |_|\\____/_____//____/")
 }
