@@ -115,3 +115,5 @@ Word.prototype = {
 		return true;
 	}
 }
+
+module.exports = Word;
