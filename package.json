@@ -1,0 +1,24 @@
+{
+  "name": "constructor-hangman",
+  "version": "1.0.0",
+  "description": "Superhero themed hangman game",
+  "main": "game.js",
+  "dependencies": {
+    "cli-color": "^1.2.0",
+    "inquirer": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewD14/constructor-hangman.git"
+  },
+  "author": "Andrew Damico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewD14/constructor-hangman/issues"
+  },
+  "homepage": "https://github.com/AndrewD14/constructor-hangman#readme"
+}
