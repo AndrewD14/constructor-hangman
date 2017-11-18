@@ -1,3 +1,6 @@
+//package requirements
+var clc = require('cli-color');
+
 //function to clear the screen
 function clearScreen(){
 	process.stdout.write("\u001b[2J\u001b[0;0H");
@@ -42,12 +45,13 @@ function displayGallow(guessesRemaining){
 }
 
 //function to display the results
-exports.displayResults = function(player, myWord){
+function displayResults(player, myWord){
 	clearScreen();
 	generateLogo();
 	displayGallow(player.getLives());
 	console.log();
 	console.log(myWord.getReveal());
+	console.log();
 }
 
 //function to display the logo
@@ -58,3 +62,17 @@ function generateLogo(){
 	console.log(" ___/ / /_/ / ____/ /___/ _, _/ __  / /___/ _, _/ /_/ / /___ ___/ /")
 	console.log("/____/\\____/_/   /_____/_/ |_/_/ /_/_____/_/ |_|\\____/_____//____/")
 }
+
+//function to display to the console log and takes in a color parameter
+function colorizeOutPut(msg){
+	if(msg.color)
+		console.log(clc[msg.color](msg.msg));
+	else
+		console.log(msg.msg);
+
+	console.log();
+}
+
+//export function for other files to use
+module.exports = {colorizeOutPut: colorizeOutPut,
+					displayResults: displayResults};

@@ -1,10 +1,10 @@
 //package requirements
 var inquirer = require("inquirer");
-var clc = require('cli-color');
 
 //local files included
 var Display = require('./display.js');
 var Word = require('./word.js');
+var Phrase = require('./phrases.js');
 
 //array of acceptable letters
 var letterCheck = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -13,10 +13,10 @@ var letterCheck = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', '
 //function to check guesses (return null if valid, returns msg if not valid)
 function isValidGuess(letter){
 	if(letter.length > 1){
-		return "The guess \""+letter+"\" is more than 1 character. Please limit to only 1 letter per guess.";
+		return "The guess "+letter+" is more than 1 character. Please limit to only 1 letter per guess.";
 	}
 	else if(letterCheck.indexOf(letter.toUpperCase()) == -1){
-		return "The guess \""+letter+"\" is not a valid guess.";
+		return "The guess "+letter+" is not a valid guess.";
 	}
 	else
 		return null;
@@ -26,7 +26,7 @@ function isValidGuess(letter){
 var getUserGuess = function(previousResponse, player, myWord){
 	//displays the message from the previous input after the screen is cleared
 	if(previousResponse)
-		console.log(previousResponse);
+		Display.colorizeOutPut(previousResponse);
 
 	//asks the user for a guess
 	inquirer.prompt([
@@ -41,7 +41,7 @@ var getUserGuess = function(previousResponse, player, myWord){
 			//checks if the player already guessed the letter
 			if(player.guessedAlready(answer.guess)){
 				Display.displayResults(player, myWord);
-				getUserGuess("The letter \""+answer.guess+"\" was guessed already.", player, myWord);
+				getUserGuess({msg: "The letter "+answer.guess+" was guessed already.", color: null}, player, myWord);
 			}
 			else{
 				//checks if it is a good guess or bad guess
@@ -60,20 +60,22 @@ var getUserGuess = function(previousResponse, player, myWord){
 					if(found){
 						//checks if guessed all the letters
 						if(myWord.guessedAll()){
-							console.log(clc.greenBright("You WIN!!!"));
+							Display.colorizeOutPut({msg: "You WIN!!!", color: "greenBright"});
 							playAgain(player, myWord);
 						}
 						else
 							getUserGuess(null, player, myWord);
 					}
 					//bad guess
-					else
-						getUserGuess("\""+clc.redBright(answer.guess)+"\" is an incorrect guess.", player, myWord);
+					else{
+						Display.colorizeOutPut({msg: "Incorrect Guess", color: "redBright"});
+						getUserGuess({msg: answer.guess+" is an incorrect guess.", color: "redBright"}, player, myWord);
+					}
 				}
 				//game over
 				else{
-					console.log(clc.redBright("GAME OVER!"));
-					console.log("The correct phrase is: "+myWord.getAnswer());
+					Display.colorizeOutPut({msg: "GAME OVER!", color: "redBright"});
+					Display.colorizeOutPut({msg: "The correct phrase is: "+myWord.getAnswer(), color: null});
 					playAgain(player, myWord);
 				}
 			}
@@ -81,7 +83,7 @@ var getUserGuess = function(previousResponse, player, myWord){
 		else{
 			//displays the results
 			Display.displayResults(player, myWord);
-			getUserGuess(badGuess, player, myWord);
+			getUserGuess({msg: badGuess, color: null}, player, myWord);
 		}
 	});
 }
@@ -103,8 +105,8 @@ function playAgain(player, myWord){
 }
 
 //function for starting and resetting the game
-var startGame = function(player, myWord){
-	myWord = new Word("The aNswer is this.");
+function startGame(player, myWord){
+	myWord = new Word(Phrase.getRandomPhrase());
 	player.reset();
 	Display.displayResults(player, myWord);
 	getUserGuess(null, player, myWord);
