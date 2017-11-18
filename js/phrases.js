@@ -26,7 +26,15 @@ var phrases = [
 "Atom",
 "Antman",
 "Flash",
-"Star-lord"];
+"Star-lord",
+"Hawkeye",
+"Captain Marvel",
+"Luke Cage",
+"Mr. Fantastic",
+"Invisible Woman",
+"Silver Surfer",
+"Professor X",
+"Cyclops"];
 
 //returns a random element from the array
 exports.getRandomPhrase = function(){
