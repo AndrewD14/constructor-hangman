@@ -7,7 +7,7 @@ var phrases = [
 "Spider-Man",
 "Black Panther",
 "Iron Man",
-"Wonder Woamn",
+"Wonder Woman",
 "Aquaman",
 "Daredevil",
 "Black Canary",
