@@ -13,10 +13,10 @@ var letterCheck = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', '
 //function to check guesses (return null if valid, returns msg if not valid)
 function isValidGuess(letter){
 	if(letter.length > 1){
-		return "The guess "+letter+" is more than 1 character. Please limit to only 1 letter per guess.";
+		return [{msg: "The guess ", color: null}, {msg: letter, color: "yellowBright"}, {msg: " is more than 1 character. Please limit to only 1 letter per guess.", color: null}];
 	}
 	else if(letterCheck.indexOf(letter.toUpperCase()) == -1){
-		return "The guess "+letter+" is not a valid guess.";
+		return [{msg: "The guess ", color: null}, {msg: letter, color: "yellowBright"}, {msg: " is not a valid guess.", color: null}];
 	}
 	else
 		return null;
@@ -41,7 +41,7 @@ var getUserGuess = function(previousResponse, player, myWord){
 			//checks if the player already guessed the letter
 			if(player.guessedAlready(answer.guess)){
 				Display.displayResults(player, myWord);
-				getUserGuess({msg: "The letter "+answer.guess+" was guessed already.", color: null}, player, myWord);
+				getUserGuess([{msg: "The letter ", color: null},{msg: answer.guess, color: "magentaBright"},{msg: " was guessed already.", color: null}], player, myWord);
 			}
 			else{
 				//checks if it is a good guess or bad guess
@@ -60,7 +60,7 @@ var getUserGuess = function(previousResponse, player, myWord){
 					if(found){
 						//checks if guessed all the letters
 						if(myWord.guessedAll()){
-							Display.colorizeOutPut({msg: "You WIN!!!", color: "greenBright"});
+							Display.colorizeOutPut([{msg: "You WIN!!!", color: "greenBright"}]);
 							playAgain(player, myWord);
 						}
 						else
@@ -68,14 +68,14 @@ var getUserGuess = function(previousResponse, player, myWord){
 					}
 					//bad guess
 					else{
-						Display.colorizeOutPut({msg: "Incorrect Guess", color: "redBright"});
-						getUserGuess({msg: answer.guess+" is an incorrect guess.", color: "redBright"}, player, myWord);
+						Display.colorizeOutPut([{msg: "Incorrect Guess", color: "redBright"}]);
+						getUserGuess([{msg: answer.guess, color: "redBright"}, {msg: " is an incorrect guess.", color: null}], player, myWord);
 					}
 				}
 				//game over
 				else{
-					Display.colorizeOutPut({msg: "GAME OVER!", color: "redBright"});
-					Display.colorizeOutPut({msg: "The correct phrase is: "+myWord.getAnswer(), color: null});
+					Display.colorizeOutPut([{msg: "GAME OVER!", color: "redBright"}]);
+					Display.colorizeOutPut([{msg: "The correct phrase is: ", color: null},{msg: myWord.getAnswer(), color: "cyanBright"}]);
 					playAgain(player, myWord);
 				}
 			}
@@ -83,7 +83,7 @@ var getUserGuess = function(previousResponse, player, myWord){
 		else{
 			//displays the results
 			Display.displayResults(player, myWord);
-			getUserGuess({msg: badGuess, color: null}, player, myWord);
+			getUserGuess(badGuess, player, myWord);
 		}
 	});
 }

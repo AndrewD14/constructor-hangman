@@ -65,11 +65,16 @@ function generateLogo(){
 
 //function to display to the console log and takes in a color parameter
 function colorizeOutPut(msg){
-	if(msg.color)
-		console.log(clc[msg.color](msg.msg));
-	else
-		console.log(msg.msg);
+	var string = "";
 
+	for(i in msg){
+		if(msg[i].color)
+			string += clc[msg[i].color](msg[i].msg);
+		else
+			string += msg[i].msg;
+	}
+
+	console.log(string)
 	console.log();
 }
 
