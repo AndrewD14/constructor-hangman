@@ -14,7 +14,6 @@ var phrases = [
 "Green Lantern",
 "Iron Fist",
 "Ghost Rider",
-"The Human Torch",
 "Doctor Strange",
 "Robin",
 "Hulk",
@@ -32,9 +31,17 @@ var phrases = [
 "Luke Cage",
 "Mr. Fantastic",
 "Invisible Woman",
+"Human Torch",
+"Thing",
 "Silver Surfer",
 "Professor X",
-"Cyclops"];
+"Cyclops",
+"Jean Grey",
+"Rouge",
+"Storm",
+"Gambit",
+"Hawkgirl",
+"Deadpool"];
 
 //returns a random element from the array
 exports.getRandomPhrase = function(){
