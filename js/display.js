@@ -90,10 +90,10 @@ function displayGallow(guessesRemaining, guessed){
 			output += guessed[i]+", ";
 
 	console.log("  |                   ");
-	
+
 	//additional possible letters
-	for(var i = 18; (i < 24 && i < guessed.length); i++)
-		if(i == 23 || i == guessed.length-1)
+	for(var i = 24; (i < 30 && i < guessed.length); i++)
+		if(i == 29 || i == guessed.length-1)
 			output += guessed[i];
 		else
 			output += guessed[i]+", ";
