@@ -28,6 +28,11 @@ Player.prototype = {
 	reset: function(){
 		this.lives = 6;
 		this.guessed = [];
+	},
+
+	//returns the previous guesses
+	getAlreadyGuessed: function(){
+		return this.guessed;
 	}
 }
 

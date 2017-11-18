@@ -7,10 +7,10 @@ function clearScreen(){
 }
 
 //displays a nice little gallow
-function displayGallow(guessesRemaining){
+function displayGallow(guessesRemaining, guessed){
 	//top
 	console.log("  ________");
-	console.log("  |      |");
+	console.log("  |      |            Previous Guesses");
 
 	//head & arms
 	var output = "  |     ";
@@ -22,13 +22,41 @@ function displayGallow(guessesRemaining){
 		output += "O";
 	if(guessesRemaining < 3)
 		output += "/";
+
+	//adds the previous guesses for the head and arms
+	if(guessesRemaining < 3)
+		output += "           ";
+	else if(guessesRemaining == 3)
+		output += "            ";
+	else if(guessesRemaining <= 5)
+		output += "            ";
+	else
+		output += "             ";
+	for(var i = 0; (i < 6 && i < guessed.length); i++)
+		if(i == 5 || i == guessed.length-1)
+			output += guessed[i];
+		else
+			output += guessed[i]+", ";
 	console.log(output);
 
 	//body
+	output = "";
 	if(guessesRemaining > 4)
-		console.log("  |");
+		output = "  |";
 	else
-		console.log("  |      |");
+		output = "  |      |";
+
+	//adds the previous guesses for the body
+	if(guessesRemaining > 4)
+		output += "                   ";
+	else
+		output += "            ";
+	for(var i = 6; (i < 12 && i < guessed.length); i++)
+		if(i == 11 || i == guessed.length-1)
+			output += guessed[i];
+		else
+			output += guessed[i]+", ";
+	console.log(output);
 
 	//legs
 	output = "  |     ";
@@ -36,11 +64,40 @@ function displayGallow(guessesRemaining){
 		output += "/ ";
 	else if(guessesRemaining < 1)
 		output += "/ \\";
+
+	//adds the previous guesses to the legs
+	if(guessesRemaining == 1)
+		output += "            ";
+	else if(guessesRemaining < 1)
+		output += "           ";
+	else
+		output += "              ";
+	for(var i = 12; (i < 18 && i < guessed.length); i++)
+		if(i == 17 || i == guessed.length-1)
+			output += guessed[i];
+		else
+			output += guessed[i]+", ";
 	console.log(output);
 
 	//base
-	console.log("  |");
-	console.log("  |");
+	console.log("  |                   ");
+
+	//additional possible letters
+	for(var i = 18; (i < 24 && i < guessed.length); i++)
+		if(i == 23 || i == guessed.length-1)
+			output += guessed[i];
+		else
+			output += guessed[i]+", ";
+
+	console.log("  |                   ");
+	
+	//additional possible letters
+	for(var i = 18; (i < 24 && i < guessed.length); i++)
+		if(i == 23 || i == guessed.length-1)
+			output += guessed[i];
+		else
+			output += guessed[i]+", ";
+
 	console.log("-----")
 }
 
@@ -48,7 +105,7 @@ function displayGallow(guessesRemaining){
 function displayResults(player, myWord){
 	clearScreen();
 	generateLogo();
-	displayGallow(player.getLives());
+	displayGallow(player.getLives(), player.getAlreadyGuessed());
 	console.log();
 	console.log(myWord.getReveal());
 	console.log();
