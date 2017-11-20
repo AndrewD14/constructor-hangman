@@ -80,7 +80,7 @@ function displayGallow(guessesRemaining, guessed){
 	console.log(output);
 
 	//base
-	console.log("  |                   ");
+	output = "  |                   ";
 
 	//additional possible letters
 	for(var i = 18; (i < 24 && i < guessed.length); i++)
@@ -88,8 +88,9 @@ function displayGallow(guessesRemaining, guessed){
 			output += guessed[i];
 		else
 			output += guessed[i]+", ";
-
-	console.log("  |                   ");
+	console.log(output);
+	
+	output = "  |                   ";
 
 	//additional possible letters
 	for(var i = 24; (i < 30 && i < guessed.length); i++)
@@ -97,7 +98,8 @@ function displayGallow(guessesRemaining, guessed){
 			output += guessed[i];
 		else
 			output += guessed[i]+", ";
-
+	console.log(output);
+	
 	console.log("-----")
 }
 
